@@ -136,7 +136,6 @@ Graph.prototype.forEachNode = function(cb) {
 
   for (var i = 0; i < this.storage.length; i++) {
     cb(this.storage[i][0]);
-    console.log(this.storage[i]);
   }
 };
 
