@@ -1,43 +1,48 @@
-var BinarySearchTree = function() {
-  var newTree = {};
-
-  newTree.insert = function (value) {
-    var newLeaf = new Leaf(value);
-    
-    if (newLeaf.value < value) {
-      console.log(newLeaf.value);
-      newLeaf.left = value;
-      console.log(newLeaf.value);
-    } else if (newLeaf.value > value) {
-      console.log(newLeaf.value);
-      newLeaf.right = value;
-      console.log(newLeaf.value);
-    } else {
-      console.log(newLeaf.value);
-      console.log(newLeaf.right);
-      return undefined;
-    }
-  };
-
-  newTree.contains = function (value) {
-
-  };
-
-  newTree.depthFirstLog = function (value) {
-
-  };
-
-  return newTree;
+var BinarySearchTree = function (value) {
+  var binaryTree = Object.create(binaryTreePrototype);
+  binaryTree.value = value;
+  binaryTree.left = null;
+  binaryTree.right = null;
+  return binaryTree;
 };
 
-var Leaf = function (value) {
-  var leaf = {};
+var binaryTreePrototype = {};
 
-  leaf.value = value;
-  leaf.left = null;
-  leaf.right = null;
+binaryTreePrototype.insert = function (val) {
+  if (val < this.value) {
+    if (this.left === null) {
+      this.left = BinarySearchTree(val);
+    } else {
+      this.left.insert(val);
+    }
+  } else if (val > this.value) {
+    if (this.right === null) {
+      this.right = BinarySearchTree(val);
+    } else {
+      this.right.insert(val);
+    }
+  } else {
+  }
+};
 
-  return leaf;
+binaryTreePrototype.contains = function (value) {
+  if (value === this.value) {
+    return true;
+  } else if (value < this.value) {
+    return !!(this.left && this.left.contains(value));
+  } else if (value > this.value) {
+    return !!(this.left && this.right.contains(value));
+  }
+};
+
+binaryTreePrototype.depthFirstLog = function (callback) {
+  callback(this.value);
+  if (this.left) {
+    this.left.depthFirstLog(callback);
+  }
+  if (this.right) {
+    this.right.depthFirstLog(callback);
+  }
 };
 
 /*
