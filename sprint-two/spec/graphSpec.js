@@ -1,5 +1,6 @@
+var graph;
 describe('graph', function() {
-  var graph;
+  
 
   beforeEach(function() {
     graph = new Graph();
